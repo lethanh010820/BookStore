@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BookStore.Models.CHUDE>
+
+@foreach (var item in Model)
+{
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.Action("SPTheochude","BookStore", new { id = item.MaCD })"><i></i>@item.TenChuDe</a>
+    </li>
+
+}

@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<BookStore.Models.SACH>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@foreach (var sach in Model)
+{
+    <div class="col-md-4">
+        <div class="product-item">
+            <div class="product-title">
+                <a href="@Url.Action("Details", "BookStore", new { id = sach.Masach })">@sach.Tensach</a>
+                <div class="ratting">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+            <div class="product-image">
+                <a href="product-detail.html">
+                    <img alt="@sach.Tensach" src="~/img/@sach.Anhbia" />
+                </a>
+                <div class="product-action">
+                    <a href="@Url.Action("Themgiohang","Giohang", new { @iMasach = @sach.Masach, @strURL=Request.Url.ToString()})"><i class="fa fa-cart-plus"></i></a>
+                    <a href="@Url.Action("Details", "BookStore", new { id = sach.Masach })"><i class="fa fa-search"></i></a>
+                </div>
+            </div>
+            <div class="product-price">
+                <h3>@String.Format("{0:0,0}", sach.Giaban)<span>₫</span></h3>
+                <a class="btn" href="@Url.Action("Themgiohang","Giohang", new { @iMasach = @sach.Masach, @strURL=Request.Url.ToString()})"><i class="fa fa-shopping-cart"></i>Mua</a>
+
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .pagination-container {
+        justify-content: center !important;
+        display: inline-block;
+    }
+
+    .pagination {
+        justify-content: center !important;
+    }
+
+        .pagination a {
+            justify-content: center !important;
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+            .pagination a.active {
+                background-color: #FF6F61;
+                color: white;
+                border-radius: 5px;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #FF6F61;
+                border-radius: 5px;
+            }
+    a:not([href]):not([class]) {
+        color: white;
+        text-decoration: none;
+        background: #FF6F61;
+        border-radius: 5px;
+    }
+</style>
+<div class="col-md-12">
+    @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("index", new { page }))
+</div>

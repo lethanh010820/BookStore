@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Dangnhap";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<!-- Login Start -->
+<div class="login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login-form">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Tên đăng nhập:</label>
+                            <input class="form-control" type="text" name="TenDN" placeholder="" />
+                            @ViewData["Loi1"]
+                        </div>
+                        <div class="col-md-6">
+                            <label>Mật khẩu:</label>
+                            <input class="form-control" type="password" name="Matkhau" placeholder="" />
+                            @ViewData["Loi2"]
+                        </div>
+                        <h5 style="color:red;text-align:center;">@ViewBag.Thongbao</h5>
+                        <div class="col-md-12">
+                            <div class="contact-info">
+                                <a href="@Url.Action("Dangky", "Nguoidung")">Chưa có tài khoản?</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input style="width:120px;height:50px; border-radius:10px; background-color:#ff6666;color:white" type="submit" value="Đăng nhập" />
+                        </div>
+                        <div class="col-md-6">
+                            <a href="@Url.Action("LoginFacebook", "Nguoidung")" class="btn btn-facebook btn-user btn-block">
+                                <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                            </a>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

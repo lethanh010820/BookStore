@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
+
+    <!-- Favicon -->
+    <link href="~/img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="~/lib/slick/slick.css" rel="stylesheet">
+    <link href="~/lib/slick/slick-theme.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/Content/style.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        .dropdown-item {
+            line-height: 46px;
+            height: 46px;
+        }
+    </style>
+    <!-- Top bar Start -->
+    <div class="top-bar">
+        <div class="container-fluid">
+            @using BookStore.Models;
+            @{
+                KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+            }
+            <div class="row">
+                <div class="col-sm-6" style="color:white;">
+                    <i class="fa fa-address-card"></i>
+                    Chào mừng:
+                    @if (Session["Taikhoan"] != null)
+                    {
+                        @kh.HoTen
+                    }
+                </div>
+                <div class="col-sm-6" style="color:white;">
+                    <i class="fa fa-phone-alt"></i>
+                    @if (Session["Taikhoan"] != null)
+                    {
+                        @kh.DienthoaiKH
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top bar End -->
+    <!-- Nav Bar Start -->
+    <div class="nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto">
+                        @Html.ActionLink("Sản phẩm", "index", "BookStore", null, new { @class = "nav-item nav-link" })
+                        @Html.ActionLink("Giỏ hàng", "Giohang", "Giohang", null, new { @class = "nav-item nav-link" })
+                        @Html.ActionLink("Liên Hệ", "Lienhe", "LienHe", null, new { @class = "nav-item nav-link" })
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
+                            <div class="dropdown-menu">
+                                @if (Session["Taikhoan"] == null)
+                                {
+
+                                    @Html.ActionLink("Đăng nhập", "Dangnhap", "Nguoidung", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Đăng ký", "Dangky", "Nguoidung", null, new { @class = "dropdown-item" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Đăng xuất", "Dangxuat", "Nguoidung", null, new { @class = "dropdown-item" })
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+    <!-- Bottom Bar Start -->
+    <div class="bottom-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a href="@Url.Action("index", "BookStore")">
+                            <img src="~/img/logo.png" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="search">
+                        <div class="search">
+                            @using (Html.BeginForm("Tìm kiếm", "BookStore", FormMethod.Get)) // -- phần thay đổi
+                            {
+                                <p>
+                                    @Html.TextBox("SearchString") <button><i class="fa fa-search"></i></button>
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    @Html.Action("GiohangPartial", "Giohang")
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom Bar End -->
+
+    <div>
+        @RenderBody()
+    </div>
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Liên hệ</h2>
+                        <div class="contact-info">
+                            <p><i class="fa fa-map-marker"></i>123 BookStore, Đăk Hà, Kon Tum</p>
+                            <p><i class="fa fa-envelope"></i>lethanh010820@gmail.com</p>
+                            <p><i class="fa fa-phone"></i>086-657-1001</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Theo dõi chúng tôi</h2>
+                        <div class="contact-info">
+                            <div class="social">
+                                <a href="https://www.facebook.com/thanh.levan.379/"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.instagram.com/thanhmuoi379/"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/easing/easing.min.js"></script>
+    <script src="~/lib/slick/slick.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/Scripts/main.js"></script>
+</body>
+</html>

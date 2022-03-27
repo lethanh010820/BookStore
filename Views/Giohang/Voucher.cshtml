@@ -1,0 +1,86 @@
+﻿@using BookStore.Models;
+@model List<Giohang>
+@{
+    ViewBag.Title = "Gio hang";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<!-- Cart Start -->
+<div class="cart-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Giá tiền</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="img">
+                                                <a href="#"><img src="~/img/@item.sAnhbia" alt="Image"></a>
+                                                <p>@item.sTensach</p>
+                                            </div>
+                                        </td>
+                                        <td>@String.Format("{0:0,0}", item.dDongia)</td>
+                                        @using (Html.BeginForm("Capnhatgiohang", "Giohang", new { @iMasp = item.iMasach }))
+                                        {
+                                            <td>
+                                                <div class="qty">
+                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                    <input type="text" name="inputSL" value="@item.iSoluong">
+                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </td>
+                                            <td>@String.Format("{0:0,0}", item.dThanhtien)</td>
+                                        }
+                                        <td>@Html.ActionLink("Xóa", "XoaGiohang", new { @iMasp = item.iMasach })</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="coupon">
+                                <h5 style="color:red;">@ViewBag.Voucher</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cart-summary">
+                                <div class="cart-content">
+                                    <h1>Tóm tắt giỏ hàng</h1>
+                                    <p>Số lượng sách:<span>@ViewBag.Tongsoluong</span></p>
+                                    <p>Phí Shipp<span>$0</span></p>
+                                    <h2>Thành tiền<span>@String.Format("{0:0,0}", ViewBag.Tongtien) VNĐ</span></h2>
+                                </div>
+                                <style>
+                                    .DH, .DH:hover {
+                                        color: white;
+                                    }
+                                </style>
+                                <div class="cart-btn">
+                                    <button>@Html.ActionLink("Trở về Trang chủ", "index", "BookStore")</button>
+                                    <button>@Html.ActionLink("Đặt hàng", "Dathang", "Giohang", null, new { @class = "DH" })</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->

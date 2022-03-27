@@ -1,0 +1,59 @@
+﻿@using BookStore.Models;
+@model List<Giohang>
+@{
+    ViewBag.Title = "DonDathang";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@{ 
+    KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+}
+<!-- Checkout Start -->
+<div class="checkout">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-inner">
+                    <div class="billing-address">
+                        <h2>Địa chỉ đặt hàng</h2>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.ValidationSummary(true)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Họ tên khách hàng:</label>
+                                    <label class="form-control">@kh.HoTen</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Địa Chỉ:</label>
+                                    <label class="form-control">@kh.DiachiKH</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>E-mail:</label>
+                                    <label class="form-control">@kh.Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Số điện thoại:</label>
+                                    <label class="form-control">@kh.DienthoaiKH</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Ngày đặt hàng:</label>
+                                    <label class="form-control">@DateTime.Now.ToShortDateString()</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Ngày giao hàng:</label>
+                                    <input class="form-control" type="date" name="Ngaygiao">
+                                </div>
+                                <div class="col-md-12">
+                                    
+                                    <input style="width: 218px; height: 50px; padding: 2px 10px; font-family: 'Source Code Pro', monospace; font-weight: 700; font-size: 20px; text-align: center; color: #000000; background: #FF6F61; border: none; border-radius: 4px; transition: all .3s;" type="submit" value="Đồng ý đặt hàng" />
+                                </div>
+                            </div>
+                        }
+                        </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- Checkout End -->

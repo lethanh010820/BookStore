@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using BotDetect.Web.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+@{ MvcCaptcha dangkyCaptcha = new MvcCaptcha("ExampleCaptcha"); }
+    <!-- Login Start -->
+    <div class="login">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="register-form">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.ValidationSummary(true)
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Họ và Tên:</label>
+                                    @Html.TextBox("HotenKH", "", new { @class = "form-control" })
+                                    <p style="color:red;">@ViewData["Loi1"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Tên đăng nhập:</label>
+
+                                    @Html.TextBox("TenDN", "", new { @class = "form-control" })
+                                    <p style="color:red;">@ViewData["Loi2"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mật khẩu:</label>
+                                    <input class="form-control" type="password" name="Matkhau" placeholder="" />
+                                    <p style="color:red;">@ViewData["Loi3"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nhập lại mật khẩu:</label>
+                                    <input class="form-control" type="password" name="Matkhau2" placeholder="" />
+                                    <p style="color:red;">@ViewData["Loi4"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Địa chỉ:</label>
+                                    @Html.TextBox("Diachi", "", new { @class = "form-control" })
+                                    <p style="color:red;">@ViewData["Loi5"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Email:</label>
+                                    @Html.TextBox("Email", "", new { @class = "form-control" })
+                                    <p style="color:red;">@ViewData["Loi6"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Số điện thoại:</label>
+                                    @Html.TextBox("Dienthoai", "", new { @class = "form-control" })
+                                    <p style="color:red;">@ViewData["Loi7"]</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Ngày sinh:</label>
+                                    <input class="form-control" type="date" name="Ngaysinh" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Nhập mã xác nhận:</label>
+                                    @Html.Captcha(dangkyCaptcha)
+                                    @Html.TextBox("CaptchaCode")
+                                    <p style="color:red;">@Html.ValidationMessage("CaptchaCode")</p>
+
+                                </div>                         
+                                <div class="col-md-12">
+                                    <input style="width:120px;height:50px; border-radius:10px; background-color:#ff6666;color:white" type="submit" value="Đăng ký" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login End -->

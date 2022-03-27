@@ -1,0 +1,62 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BookStore.Models.SACH>
+@{
+    ViewBag.Title = "Sach";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                        <h4 class="card-title">Quản lý xe</h4>
+                        <p class="card-category">@Html.ActionLink("Thêm mới sản phẩm", "Themmoisach")</p>
+                    </div>
+                    <div class="card-body table-full-width table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Giá bán</th>
+                            <th>Ảnh bìa</th>
+                            <th>Mô tả Sản phẩm</th>
+                            <th>Ngày cập nhật</th>
+                            <th>SL Tồn</th>
+                            <th>Chủ dề</th>
+                            <th>Nhà XB</th>
+                            <th>Xóa/Sửa</th>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Masach</td>
+                                        <td>@item.Tensach</td>
+                                        <td>@item.Giaban</td>
+                                        <td><img style="height: 125px;width: 125px;" src="@Url.Content("~/img/"+ item.Anhbia)" /></td>
+                                        <td>@item.Mota</td>
+                                        <td>@item.Ngaycapnhat</td>
+                                        <td>@item.Soluongton</td>
+                                        <td>@item.CHUDE.TenChuDe</td>
+                                        <td>@item.NHAXUATBAN.TenNXB</td>
+                                        <td>
+                                            @Html.ActionLink("Chi tiết", "Chitietsach", new { id = item.Masach })|
+                                            @Html.ActionLink("Chỉnh sửa", "Suasach", new { id = item.Masach }) |
+                                            @Html.ActionLink("Xóa", "Xoasach", new { id = item.Masach })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="Menutrang">
+    @Html.PagedListPager(Model, page => Url.Action("Sach", new { page }))
+</div>

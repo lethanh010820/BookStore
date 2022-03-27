@@ -1,0 +1,52 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BookStore.Models.KHACHHANG>
+@{
+    ViewBag.Title = "Sach";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                        <h4 class="card-title">Quản lý Khách hàng</h4>
+                    </div>
+                    <div class="card-body table-full-width table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th>Mã Khách hàng</th>
+                            <th>Tên Khách hàng</th>
+                            <th>Tên Tài khoản</th>
+                            <th>E-mail</th>
+                            <th>Địa chỉ</th>
+                            <th>Số Điện thoại</th>
+                            <th>Ngày sinh</th>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.MaKH</td>
+                                        <td>@item.HoTen</td>
+                                        <td>@item.Taikhoan</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.DiachiKH</td>
+                                        <td>@item.DienthoaiKH</td>
+                                        <td>@item.Ngaysinh</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="Menutrang">
+    @Html.PagedListPager(Model, page => Url.Action("QLKhachHang", new { page }))
+</div>
+
